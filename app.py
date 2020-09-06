@@ -25,28 +25,31 @@ def get_competitors():
 @app.route('/get_buildings')
 @cross_origin(supports_credentials=True)
 def get_buildings():
-    convert_map_to_json()
     with open('data/moscow_buildings.json') as f:
         load_data = json.load(f)
     return load_data
 
 
-def convert_map_to_json():
-    if os.path.exists('data/moscow_buildings.json'):
-        return
+@app.route('/get_schools')
+@cross_origin(supports_credentials=True)
+def get_schools():
+    with open('data/moscow_school.json') as f:
+        load_data = json.load(f)
+    return load_data
 
-    df = pd.read_csv('data/moscow_buildings.csv', index_col='osm_id')
-    df = df.drop(columns='is_moscow')
+
+def convert_map_to_json():
+    df = pd.read_csv('data/school_data.csv')
+  #  df = df.drop(columns='is_moscow')
     res = df.to_json(orient='index')
     res = json.loads(res)
 
-    for i in res:
-        res[i]['coords'] = ast.literal_eval(res[i]['coords'])
-        res[i]['center'] = ast.literal_eval(res[i]['center'])
+  #  for i in res:
+  #      res[i]['coords'] = ast.literal_eval(res[i]['coords'])
+  #      res[i]['center'] = ast.literal_eval(res[i]['center'])
 
-    with open('data/moscow_buildings.json', 'w') as f:
+    with open('data/moscow_school.json', 'w') as f:
         print(json.dumps(res), file=f)
-
 
 if __name__ == '__main__':
     app.run()
