@@ -38,8 +38,16 @@ def get_schools():
     return load_data
 
 
+@app.route('/get_ratings')
+@cross_origin(supports_credentials=True)
+def get_ratings():
+    with open('data/corr_ratings.json') as f:
+        load_data = f.read()
+    return load_data
+
+
 def convert_map_to_json():
-    df = pd.read_csv('data/school_data.csv')
+    df = pd.read_csv('data/school_data.csv', error_bad_lines=False)
   #  df = df.drop(columns='is_moscow')
     res = df.to_json(orient='index')
     res = json.loads(res)
