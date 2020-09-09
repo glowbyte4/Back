@@ -25,8 +25,8 @@ def get_competitors():
 @app.route('/get_buildings')
 @cross_origin(supports_credentials=True)
 def get_buildings():
-    with open('data/moscow_buildings.json') as f:
-        load_data = json.load(f)
+    with open('data/build2.json') as f:
+        load_data = f.read()
     return load_data
 
 
@@ -41,7 +41,7 @@ def get_schools():
 @app.route('/get_ratings')
 @cross_origin(supports_credentials=True)
 def get_ratings():
-    with open('data/corr_ratings.json') as f:
+    with open('data/corr_ratings1.json') as f:
         load_data = f.read()
     return load_data
 
