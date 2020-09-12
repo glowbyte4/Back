@@ -41,7 +41,7 @@ def get_schools():
 @app.route('/get_ratings')
 @cross_origin(supports_credentials=True)
 def get_ratings():
-    with open('data/corr_ratings1.json') as f:
+    with open('data/corr_ratings250meters.json') as f:
         load_data = f.read()
     return load_data
 
