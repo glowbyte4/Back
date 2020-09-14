@@ -46,6 +46,14 @@ def get_ratings():
     return load_data
 
 
+@app.route('/get_rent_info')
+@cross_origin(supports_credentials=True)
+def get_rent_info():
+    with open('data/rent_list.json') as f:
+        load_data = f.read()
+    return load_data
+
+
 def convert_map_to_json():
     df = pd.read_csv('data/school_data.csv', error_bad_lines=False)
   #  df = df.drop(columns='is_moscow')
